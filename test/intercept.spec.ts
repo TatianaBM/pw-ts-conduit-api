@@ -10,19 +10,6 @@ import { test, expect, request } from '@playwright/test'
 // })
 
 test('create an article thru ui', async ({page, request}) => {
-    // get token
-    const apiCallLogin = await request.post('https://conduit-api.bondaracademy.com/api/users/login', {
-        data: {
-        "user": {
-            "email": "fuchs@gmail.com",
-            "password": "fuchs123"
-            }
-        }
-    })
-    expect(apiCallLogin.status()).toEqual(200)
-    const responseBody = await apiCallLogin.json()
-    const accessToken = responseBody.user.token
-
     // create an article thru UI
     await page.goto('https://conduit.bondaracademy.com/')
     await page.locator('li.nav-item', {hasText: 'New Article'}).click()
@@ -36,11 +23,7 @@ test('create an article thru ui', async ({page, request}) => {
     const articleSlug = responseArticleBody.article.slug
     
     // delete article thru api
-    const deleteResponse = await request.delete(`https://conduit-api.bondaracademy.com/api/articles/${articleSlug}`, {
-        headers: {
-            Authorization: `Token ${accessToken}`
-        }
-    })
+    const deleteResponse = await request.delete(`https://conduit-api.bondaracademy.com/api/articles/${articleSlug}`)
     expect(deleteResponse.status()).toEqual(204)
     await page.locator('li.nav-item', {hasText: 'Home'}).click()
     await expect(page.locator('app-article-preview a h1').first()).not.toContainText('new test article')
