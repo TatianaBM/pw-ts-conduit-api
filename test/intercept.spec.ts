@@ -1,13 +1,13 @@
 import { test, expect, request } from '@playwright/test'
 
-test.beforeEach(async ({page}) => {
-    await page.goto('https://conduit.bondaracademy.com/')
-    // log in 
-    await page.getByText('Sign in').click()
-    await page.getByPlaceholder('Email').fill('fuchs@gmail.com')
-    await page.getByPlaceholder('Password').fill('fuchs123')
-    await page.getByRole('button', {name: 'Sign in'}).click()
-})
+// test.beforeEach(async ({page}) => {
+//     await page.goto('https://conduit.bondaracademy.com/')
+//     // log in 
+//     await page.getByText('Sign in').click()
+//     await page.getByPlaceholder('Email').fill('fuchs@gmail.com')
+//     await page.getByPlaceholder('Password').fill('fuchs123')
+//     await page.getByRole('button', {name: 'Sign in'}).click()
+// })
 
 test('create an article thru ui', async ({page, request}) => {
     // get token
@@ -24,6 +24,7 @@ test('create an article thru ui', async ({page, request}) => {
     const accessToken = responseBody.user.token
 
     // create an article thru UI
+    await page.goto('https://conduit.bondaracademy.com/')
     await page.locator('li.nav-item', {hasText: 'New Article'}).click()
     await page.getByPlaceholder('Article Title').fill('new test article')
     await page.getByPlaceholder('What\'s this article about?').fill('new test article description')
