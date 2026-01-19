@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "run:tests:uiMode": "npx playwright test --ui",
+    "run:test:chromium": "npm run run:tests:uiMode --project=chromium",
+    "run:test:firefox": "npm run run:tests:uiMode --project=firefox",
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
