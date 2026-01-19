@@ -25,7 +25,7 @@ test('gelete article', async ({page, request}) => {
     
     // create a new article thru api
     const apiCallLoginArticle = await request.post(
-      "https://conduit-api.bondaracademy.com/api/articles/",
+      'https://conduit-api.bondaracademy.com/api/articles/',
       {
         data: {
             article: {
