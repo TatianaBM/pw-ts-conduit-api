@@ -4,10 +4,17 @@ import {
 } from "../src/test-data/generateArticleData.js";
 import { test, expect } from "@playwright/test";
 
+test.describe.configure({retries: 2})
+
 test("reconfirm number of comments after deletion of one", async ({
   page,
-  request,
-}) => {
+  request
+}, testInfo) => {
+  // set a condition e.g. clean the database before test retry
+  if(testInfo.retry) {
+    // code to clean database before running test again
+  }
+
   // create an article tru api
   const createArticleApi = await request.post(
     "https://conduit-api.bondaracademy.com/api/articles/",
