@@ -32,6 +32,13 @@ export default defineConfig({
     trace: 'on-first-retry',
     extraHTTPHeaders: {
       Authorization: `Token ${process.env.ACCESS_TOKEN}`
+    },
+    video: {
+      mode: 'on',
+      size: {
+        width: 1920, 
+        height: 1080
+      }
     }
   },
 
