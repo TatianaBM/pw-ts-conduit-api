@@ -20,8 +20,8 @@ setup("authentication", async ({ request }) => {
     {
       data: {
         user: {
-          email: "fuchs@gmail.com",
-          password: "fuchs123",
+          email: process.env.USEREMAIL,
+          password: process.env.USERPASSWORD,
         },
       },
     },

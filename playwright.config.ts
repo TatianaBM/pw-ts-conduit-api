@@ -1,5 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
-import type { TestOptions } from './test-options.ts'
+import type { TestOptions } from './test-options'
+import { loadEnv } from './src/utils/env/loadEnv';
 
 /**
  * Read environment variables from file.
@@ -8,7 +9,7 @@ import type { TestOptions } from './test-options.ts'
 // import dotenv from 'dotenv';
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
-
+loadEnv()
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
