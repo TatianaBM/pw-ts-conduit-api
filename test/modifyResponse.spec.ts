@@ -18,7 +18,7 @@ test.beforeEach(async ({page}) => {
     })
   })
 
-  await page.goto('https://conduit.bondaracademy.com/')
+  await page.goto('/')
 })
 
 

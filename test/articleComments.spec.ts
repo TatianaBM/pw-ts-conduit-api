@@ -4,10 +4,17 @@ import {
 } from "../src/test-data/generateArticleData.js";
 import { test, expect } from "@playwright/test";
 
+test.describe.configure({retries: 2})
+
 test("reconfirm number of comments after deletion of one", async ({
   page,
-  request,
-}) => {
+  request
+}, testInfo) => {
+  // set a condition e.g. clean the database before test retry
+  if(testInfo.retry) {
+    // code to clean database before running test again
+  }
+
   // create an article tru api
   const createArticleApi = await request.post(
     "https://conduit-api.bondaracademy.com/api/articles/",
@@ -55,10 +62,20 @@ test("reconfirm number of comments after deletion of one", async ({
   expect(addComment3.status()).toEqual(200);
 
   // verify comments on UI
-  await page.goto('https://conduit.bondaracademy.com/')
+  await page.goto('/')
   await page.locator('.preview-link h1', {hasText: createArticleResponse.article.title}).click()
   await page.waitForResponse(`https://conduit-api.bondaracademy.com/api/articles/${articleSlug}`)
   await page.waitForResponse(`https://conduit-api.bondaracademy.com/api/articles/${articleSlug}/comments`)
+
+  // for intergation with third services (e.g. slack) we can create a binary
+  const buffer = await page.screenshot()
+  console.log(buffer.toString('base64'))
+
+  // make a screenshot of a particular element
+  await page.locator('.nav-item').last().screenshot({path: 'screenshots/username.png'})
+  
+  // make a screenshot entire browser view
+  await page.screenshot({path: 'screenshots/articleComments.png'})
   // get comments text
   const commentsText = await page.locator('p.card-text').allTextContents()
   // confirm number of comments

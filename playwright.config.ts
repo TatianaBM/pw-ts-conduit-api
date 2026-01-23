@@ -1,4 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
+import type { TestOptions } from './test-options'
+import { loadEnv } from './src/utils/env/loadEnv';
 
 /**
  * Read environment variables from file.
@@ -8,17 +10,20 @@ import { defineConfig, devices } from '@playwright/test';
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 
+// Load .env file
+loadEnv()
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-export default defineConfig({
+// add TestOptions type to defineConfig
+export default defineConfig<TestOptions>({
   testDir: './test',
   /* Run tests in files in parallel */
-  fullyParallel: true,
+  fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 2 : 1,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
@@ -26,12 +31,20 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
+    baseURL: process.env.BASE_URL,
+    gitHubRealProjectUrl: 'https://github.com/gothinkster/realworld',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     extraHTTPHeaders: {
       Authorization: `Token ${process.env.ACCESS_TOKEN}`
+    },
+    video: {
+      mode: 'on',
+      size: {
+        width: 1920, 
+        height: 1080
+      }
     }
   },
 
