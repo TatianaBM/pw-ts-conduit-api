@@ -67,6 +67,10 @@ test("reconfirm number of comments after deletion of one", async ({
   await page.waitForResponse(`https://conduit-api.bondaracademy.com/api/articles/${articleSlug}`)
   await page.waitForResponse(`https://conduit-api.bondaracademy.com/api/articles/${articleSlug}/comments`)
 
+  // for intergation with third services (e.g. slack) we can create a binary
+  const buffer = await page.screenshot()
+  console.log(buffer.toString('base64'))
+
   // make a screenshot of a particular element
   await page.locator('.nav-item').last().screenshot({path: 'screenshots/username.png'})
   
