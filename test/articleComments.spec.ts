@@ -66,6 +66,12 @@ test("reconfirm number of comments after deletion of one", async ({
   await page.locator('.preview-link h1', {hasText: createArticleResponse.article.title}).click()
   await page.waitForResponse(`https://conduit-api.bondaracademy.com/api/articles/${articleSlug}`)
   await page.waitForResponse(`https://conduit-api.bondaracademy.com/api/articles/${articleSlug}/comments`)
+
+  // make a screenshot of a particular element
+  await page.locator('.nav-item').last().screenshot({path: 'screenshots/username.png'})
+  
+  // make a screenshot entire browser view
+  await page.screenshot({path: 'screenshots/articleComments.png'})
   // get comments text
   const commentsText = await page.locator('p.card-text').allTextContents()
   // confirm number of comments
