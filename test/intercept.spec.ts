@@ -1,7 +1,7 @@
 import { test, expect, request } from '@playwright/test'
 
 // test.beforeEach(async ({page}) => {
-//     await page.goto('https://conduit.bondaracademy.com/')
+//     await page.goto('/')
 //     // log in 
 //     await page.getByText('Sign in').click()
 //     await page.getByPlaceholder('Email').fill('fuchs@gmail.com')
@@ -11,7 +11,7 @@ import { test, expect, request } from '@playwright/test'
 
 test('create an article thru ui', async ({page, request}) => {
     // create an article thru UI
-    await page.goto('https://conduit.bondaracademy.com/')
+    await page.goto('/')
     await page.locator('li.nav-item', {hasText: 'New Article'}).click()
     await page.getByPlaceholder('Article Title').fill('new test article')
     await page.getByPlaceholder('What\'s this article about?').fill('new test article description')

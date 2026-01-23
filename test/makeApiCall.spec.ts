@@ -1,7 +1,7 @@
 import { test, expect, request } from '@playwright/test'
 
 // test.beforeEach(async ({page}) => {
-//     await page.goto('https://conduit.bondaracademy.com/')
+//     await page.goto('/')
 //     // log in 
 //     await page.getByText('Sign in').click()
 //     await page.getByPlaceholder('Email').fill('fuchs@gmail.com')
@@ -45,7 +45,7 @@ test('gelete article', async ({page, request}) => {
     expect(apiCallLoginArticle.status()).toEqual(201)
 
     // delete an article thru UI
-    await page.goto('https://conduit.bondaracademy.com/')
+    await page.goto('/')
     await page.locator('.article-preview .preview-link', {hasText: 'Test fuchs'}).click()
     await page.getByRole('button', {name: 'Delete Article'}).first().click()
    

@@ -62,7 +62,7 @@ test("reconfirm number of comments after deletion of one", async ({
   expect(addComment3.status()).toEqual(200);
 
   // verify comments on UI
-  await page.goto('https://conduit.bondaracademy.com/')
+  await page.goto('/')
   await page.locator('.preview-link h1', {hasText: createArticleResponse.article.title}).click()
   await page.waitForResponse(`https://conduit-api.bondaracademy.com/api/articles/${articleSlug}`)
   await page.waitForResponse(`https://conduit-api.bondaracademy.com/api/articles/${articleSlug}/comments`)

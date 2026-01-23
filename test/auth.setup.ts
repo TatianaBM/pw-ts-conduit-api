@@ -6,7 +6,7 @@ const authFile = ".auth/user.json";
 
 setup("authentication", async ({ request }) => {
   // UI auth
-  // await page.goto('https://conduit.bondaracademy.com/')
+  // await page.goto('/')
   // await page.getByText('Sign in').click()
   // await page.getByPlaceholder('Email').fill('fuchs@gmail.com')
   // await page.getByPlaceholder('Password').fill('fuchs123')
