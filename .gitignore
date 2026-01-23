@@ -8,4 +8,7 @@ node_modules/
 /playwright/.auth/
 .auth/
 screenshots/
-.env
+
+# dotenv environment variable files
+.env.local
+.env.staging
