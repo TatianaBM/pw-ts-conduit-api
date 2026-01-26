@@ -63,13 +63,39 @@ export default defineConfig<TestOptions>({
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'], storageState: '.auth/user.json'},
+      use: { 
+        browserName: 'firefox', 
+        storageState: '.auth/user.json',
+        // turn video off for firefox project
+        video: {
+          mode: 'off',
+          size: {
+            width: 1920, 
+            height: 1080
+          }
+        }},
       dependencies: ['setup'],
+      // overwrite default timeout
+      timeout: 60000
     },
 
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'], storageState: '.auth/user.json' },
+      dependencies: ['setup'],
+    },
+
+    // create your own project
+    {
+      name: 'Create Article UI',
+      testMatch: 'intercept.spec.ts',
+      use: { 
+        storageState: '.auth/user.json',
+        viewport: {
+          width: 1920,
+          height: 1080
+        }
+       },
       dependencies: ['setup'],
     },
 
