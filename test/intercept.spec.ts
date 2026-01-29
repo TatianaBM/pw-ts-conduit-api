@@ -9,7 +9,7 @@ import { test, expect, request } from '@playwright/test'
 //     await page.getByRole('button', {name: 'Sign in'}).click()
 // })
 
-test('create an article thru ui', async ({page, request}) => {
+test('create an article thru ui @testTag', async ({page, request}) => {
     // create an article thru UI
     await page.goto('/')
     await page.locator('li.nav-item', {hasText: 'New Article'}).click()

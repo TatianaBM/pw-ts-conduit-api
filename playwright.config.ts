@@ -27,7 +27,12 @@ export default defineConfig<TestOptions>({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [
+    ['json', {outputFile: 'test-results/jsonReport.json'}],
+    ['junit', {outputFile: 'test-results/junitReport.xml'}],
+    ['allure-playwright'],
+    ['html']
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
@@ -47,6 +52,8 @@ export default defineConfig<TestOptions>({
       }
     }
   },
+  //globalSetup: './global-setup',
+  //globalTeardown: './global-teardown',
 
   /* Configure projects for major browsers */
   projects: [
@@ -56,7 +63,33 @@ export default defineConfig<TestOptions>({
     },
 
     {
-      name: 'chromium',
+      name: 'articleSetup',
+      testMatch: 'newArticle.setup.ts',
+      dependencies: ['setup'],
+      teardown: 'articleCleanUp'
+    },
+
+    {
+      name: 'articleCleanUp',
+      testMatch: 'articleCleanUp.setup.ts'
+    },
+
+    {
+      name: 'likesCounterProjectLevel',
+      testMatch: 'likesCounterWithProjectSetupTearDownSetup.spec.ts',
+      use: { ...devices['Desktop Chrome'], storageState: '.auth/user.json'},
+      dependencies: ['articleSetup']
+    },
+
+    {
+      name: 'likesCounterGlobalLevel',
+      testMatch: 'likesCounterWithGlobalSetupTearDown.spec.ts',
+      use: { ...devices['Desktop Chrome'], storageState: '.auth/user.json'},
+    },
+
+    {
+      name: 'regression',
+      testIgnore: ['likesCounterWithProjectSetupTearDownSetup.spec.ts', 'likesCounterWithGlobalSetupTearDown.spec.ts'],
       use: { ...devices['Desktop Chrome'], storageState: '.auth/user.json'},
       dependencies: ['setup'],
     },
@@ -82,6 +115,16 @@ export default defineConfig<TestOptions>({
     {
       name: 'webkit',
       use: { ...devices['Desktop Safari'], storageState: '.auth/user.json' },
+      dependencies: ['setup'],
+    },
+
+    {
+      name: 'mobile',
+      testMatch: 'testMobile.spec.ts',
+      use: {
+        ...devices['iPhone 14 Pro'],
+        //viewport: { width: 414, height: 800}
+      },
       dependencies: ['setup'],
     },
 
