@@ -6,7 +6,8 @@
   "scripts": {
     "run:tests:uiMode": "npx playwright test --ui",
     "run:test:chromium": "npm run run:tests:uiMode --project=chromium",
-    "run:test:firefox": "npm run run:tests:uiMode --project=firefox"
+    "run:test:firefox": "npm run run:tests:uiMode --project=firefox",
+    "run:test:comments:smoke": "npx playwright test --project=regression --grep '@smoke'"
   },
   "keywords": [],
   "author": "",

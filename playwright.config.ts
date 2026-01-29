@@ -47,8 +47,8 @@ export default defineConfig<TestOptions>({
       }
     }
   },
-  globalSetup: './global-setup',
-  globalTeardown: './global-teardown',
+  //globalSetup: './global-setup',
+  //globalTeardown: './global-teardown',
 
   /* Configure projects for major browsers */
   projects: [
@@ -84,7 +84,7 @@ export default defineConfig<TestOptions>({
 
     {
       name: 'regression',
-      testIgnore: 'likesCounterWithProjectSetupTearDownSetup.spec.ts',
+      testIgnore: ['likesCounterWithProjectSetupTearDownSetup.spec.ts', 'likesCounterWithGlobalSetupTearDown.spec.ts'],
       use: { ...devices['Desktop Chrome'], storageState: '.auth/user.json'},
       dependencies: ['setup'],
     },

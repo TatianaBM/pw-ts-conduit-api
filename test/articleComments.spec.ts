@@ -6,7 +6,7 @@ import { test, expect } from "@playwright/test";
 
 test.describe.configure({retries: 2})
 
-test("reconfirm number of comments after deletion of one", async ({
+test("reconfirm number of comments after deletion of one @smoke @regression", async ({
   page,
   request
 }, testInfo) => {
