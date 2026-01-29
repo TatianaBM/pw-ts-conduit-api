@@ -7,7 +7,8 @@
     "run:tests:uiMode": "npx playwright test --ui",
     "run:test:chromium": "npm run run:tests:uiMode --project=chromium",
     "run:test:firefox": "npm run run:tests:uiMode --project=firefox",
-    "run:test:comments:smoke": "npx playwright test --project=regression --grep '@smoke'"
+    "run:test:comments:smoke": "npx playwright test --project=regression --grep '@smoke'",
+    "generate allure report": "allure generate ./allure-results -o ./allure-report"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +18,9 @@
     "@faker-js/faker": "10.2.0",
     "@playwright/test": "1.57.0",
     "@types/node": "25.0.9",
-    "dotenv": "^17.2.3",
+    "allure-commandline": "2.36.0",
+    "allure-playwright": "3.4.5",
+    "dotenv": "17.2.3",
     "ts-node": "10.9.2",
     "typescript": "5.9.3"
   }

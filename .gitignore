@@ -12,3 +12,7 @@ screenshots/
 # dotenv environment variable files
 .env.local
 .env.staging
+
+# reports
+allure-report
+allure-results
