@@ -47,6 +47,8 @@ export default defineConfig<TestOptions>({
       }
     }
   },
+  globalSetup: './global-setup',
+  globalTeardown: './global-teardown',
 
   /* Configure projects for major browsers */
   projects: [
@@ -68,14 +70,21 @@ export default defineConfig<TestOptions>({
     },
 
     {
-      name: 'like counter',
-      testMatch: 'likesCounterWithTearDownSetup.spec.ts',
+      name: 'likesCounterProjectLevel',
+      testMatch: 'likesCounterWithProjectSetupTearDownSetup.spec.ts',
       use: { ...devices['Desktop Chrome'], storageState: '.auth/user.json'},
       dependencies: ['articleSetup']
     },
 
     {
-      name: 'chromium',
+      name: 'likesCounterGlobalLevel',
+      testMatch: 'likesCounterWithGlobalSetupTearDown.spec.ts',
+      use: { ...devices['Desktop Chrome'], storageState: '.auth/user.json'},
+    },
+
+    {
+      name: 'regression',
+      testIgnore: 'likesCounterWithProjectSetupTearDownSetup.spec.ts',
       use: { ...devices['Desktop Chrome'], storageState: '.auth/user.json'},
       dependencies: ['setup'],
     },

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 
-test('article like increase', async({page}) => {
+test('article like increase GLOBAL SETUP example', async({page}) => {
     await page.goto('/')
     await page.locator('.nav-link', {hasText: 'Global Feed'}).click()
     await page.waitForResponse('https://conduit-api.bondaracademy.com/api/articles?limit=10&offset=0')
