@@ -113,6 +113,16 @@ export default defineConfig<TestOptions>({
       dependencies: ['setup'],
     },
 
+    {
+      name: 'mobile',
+      testMatch: 'testMobile.spec.ts',
+      use: {
+        ...devices['iPhone 14 Pro'],
+        //viewport: { width: 414, height: 800}
+      },
+      dependencies: ['setup'],
+    },
+
     // create your own project
     {
       name: 'Create Article UI',
