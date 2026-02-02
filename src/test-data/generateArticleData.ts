@@ -11,7 +11,7 @@ export function generateArticle(): Article {
             title : faker.lorem.sentence(),
             description : faker.lorem.paragraph(2),
             body : faker.lorem.paragraph(10),
-            tagList : [ "AI", "Healthcare", "Technology" ]
+            tagList : [ "AI", "healthcare", "technology" ]
         }
     }
 }
