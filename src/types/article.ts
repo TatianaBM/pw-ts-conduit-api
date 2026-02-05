@@ -7,3 +7,5 @@ export interface Article {
 
     }
 }
+
+export type Tags = string[]
