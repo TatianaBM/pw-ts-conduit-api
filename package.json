@@ -17,10 +17,12 @@
   "devDependencies": {
     "@faker-js/faker": "10.2.0",
     "@playwright/test": "1.57.0",
+    "@types/lodash": "4.17.23",
     "@types/node": "25.0.9",
     "allure-commandline": "2.36.0",
     "allure-playwright": "3.4.5",
     "dotenv": "17.2.3",
+    "lodash": "4.17.23",
     "ts-node": "10.9.2",
     "typescript": "5.9.3"
   }
